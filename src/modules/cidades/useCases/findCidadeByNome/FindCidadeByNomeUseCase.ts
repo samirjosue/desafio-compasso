@@ -12,7 +12,6 @@ class FindCidadeByNomeUseCase {
 
   async execute(nome: string): Promise<Cidade> {
     const cidade = await this.cidadesRepository.findByNome(nome);
-
     if(!cidade){
       throw new AppError("Nenhuma cidade encontrada!", 200);
     }

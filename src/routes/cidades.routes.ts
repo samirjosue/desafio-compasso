@@ -11,6 +11,6 @@ const findCidadeByNomeController = new FindCidadeByNomeController();
 
 cidadesRouter.post("/", createCidadeController.handle);
 cidadesRouter.get("/findByEstado/:estado", findCidadesByEstadoController.handle);
-cidadesRouter.get("/findByNome/:cidade", findCidadeByNomeController.handle);
+cidadesRouter.get("/findByNome/:nome", findCidadeByNomeController.handle);
 
 export { cidadesRouter }

@@ -4,8 +4,7 @@ import { FindCidadeByNomeUseCase } from "./FindCidadeByNomeUseCase";
 
 class FindCidadeByNomeController {
   async handle(request: Request, response: Response): Promise<Response>{
-    const { nome } = request.query;
-
+    const { nome } = request.params;
     const findCidadeByNomeUseCase = container.resolve(FindCidadeByNomeUseCase);
 
     const cidade = await findCidadeByNomeUseCase.execute(String(nome));

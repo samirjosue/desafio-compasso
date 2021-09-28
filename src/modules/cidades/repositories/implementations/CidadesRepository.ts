@@ -24,7 +24,7 @@ class CidadesRepository implements ICidadesRepository {
   }
 
   async findByNome(nome: string): Promise<Cidade> {
-    const cidade = this.repository.findOne({ nome })
+    const cidade = this.repository.findOne({ where: { nome }})
     return cidade;
   }
 
