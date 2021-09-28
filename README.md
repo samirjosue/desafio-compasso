@@ -2,7 +2,7 @@
 Desafio Compasso Backend Node.js
 
 ```
-$ git clone 
+$ git clone https://github.com/samirjosue/desafio-compasso.git
 ```
 # Para rodar a aplicação
 ```
