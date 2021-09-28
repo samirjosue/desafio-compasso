@@ -1,0 +1,380 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Desafio COmpasso Documentation",
+    "description": "This is an API REST",
+    "version": "1.0.0",
+    "contact": {
+      "email":"samirjosue@gmail.com"
+    }
+  },
+  "paths": {
+    "/cidades": {
+      "post": {
+        "tags": ["Cidades"],
+        "summary": "Create a cidade",
+         "description": "Create a new cidade",
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                   "nome": {
+                     "type": "string"
+                   },
+                   "estado": {
+                     "type": "string"
+                   }
+                 },
+                 "example": {
+                   "nome": "Ibimirim",
+                   "estado": "Pernambuco"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "201": {
+             "description": "Created"
+           },
+           "400": {
+             "description": "Cidade já cadastrada!"
+           }
+         }
+      }
+    },
+    "/cidades/findByNome/{nome}": {
+      "get": {
+        "tags": ["Cidades"],
+        "summary": "Find Cidade by nome",
+        "description": "Return a objects of Cidade",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "description": "Nome da cidade",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+           "200": {
+             "description": "Success",
+             "content":{
+               "application/json":{
+                 "schema": {
+                   "type": "object",
+                   "properties": {
+                     "id": {
+                       "type": "number",
+                       "example": 1
+                     },
+                     "nome": {
+                       "type": "string",
+                       "example": "Ibimirim"
+                     },
+                     "estado": {
+                       "type": "string",
+                       "example": "Pernambuco"
+                     }
+                   }
+                 }
+               }
+             }
+           },
+           "500": {
+             "description": "Internal error server"
+           }
+        }
+      }
+    },
+    "/cidades/findByEstado/{estado}": {
+      "get": {
+        "tags": ["Cidades"],
+        "summary": "Find Cidade by estado",
+        "description": "Return a array objects of Cidade",
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "path",
+            "description": "Nome do estado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+           "200": {
+             "description": "Success",
+             "content":{
+               "application/json":{
+                 "schema": {
+                   "properties": {
+                     "cidades":{
+                         "$ref": "#/definitions/Cidade"
+                       }
+                     }
+                   }
+                 }
+               }
+           },
+           "500": {
+             "description": "Internal error server"
+           }
+        }
+      }
+    },
+    "/clientes": {
+      "post": {
+        "tags": ["Clientes"],
+        "summary":"Create a new cliente",
+        "description": "Create a new cliente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "example": "Nome Cliente"
+                  },
+                  "sexo": {
+                    "example": "Masculino"
+                  },
+                  "idade": {
+                    "type": "integer",
+                    "example": 12
+                  },
+                  "data_nascimento": {
+                    "example": "1998-04-01"
+                  },
+                  "cidade_id": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Cliente"
+                }
+              }
+            }
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/clientes/findById/{id}": {
+      "get":{
+        "tags": ["Clientes"],
+        "summary": "Find Cliente by Id",
+        "description": "Find Cliente by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+           "200": {
+             "description": "Success",
+             "content":{
+               "application/json":{
+                 "schema": {
+                    "$ref": "#/definitions/Cliente"
+                   }
+                 }
+               }
+           },
+           "404": {
+             "description": "Cliente não encontrado!"
+           },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
+    },
+    "/clientes/findByNome/{nome}": {
+      "get": {
+        "tags": ["Clientes"],
+        "summary": "Find cliente by nome",
+        "description": "Find cliente by nome",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "description": "nome do cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+           "200": {
+             "description": "Success",
+             "content":{
+               "application/json":{
+                 "schema": {
+                   "properties": {
+                     "cidades":{
+                         "$ref": "#/definitions/Cliente"
+                       }
+                     }
+                   }
+                 }
+               }
+           },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
+    },
+    "/clientes/delete/{id}":{
+      "delete":{
+        "tags": ["Clientes"],
+        "summary": "Delete cliente",
+        "description": "Delete cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+           "200": {
+             "description": "Success"
+           },
+           "404": {
+             "description": "Cliente não encontrado!"
+           },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
+    },
+    "/clientes/update/{id}":{
+      "put":{
+        "tags": ["Clientes"],
+        "summary": "Update nome cliente",
+        "description": "Update nome cliente",
+        "requestBody": {
+          "content": {
+            "application/json":{
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "example": "Nome Cliente"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+           "200": {
+             "description": "Success"
+           },
+           "404": {
+             "description": "Cliente não encontrado!"
+           },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Cidade": {
+      "type": "object",
+      "properties": {
+       "id": {
+         "type": "number",
+         "example": 1
+       },
+       "nome": {
+         "type": "string",
+         "example": "Ibimirim"
+       },
+       "estado": {
+         "type": "string",
+         "example": "Pernambuco"
+       },
+       "created_at": {
+         "type": "string"
+       }
+      }
+    },
+    "Cliente": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "example": "Nome Cliente"
+        },
+        "sexo": {
+          "example": "Masculino"
+        },
+        "idade": {
+          "type": "integer",
+          "example": 12
+        },
+        "data_nascimento": {
+          "example": "1998-04-01"
+        },
+        "cidade_id": {
+          "type": "integer",
+          "example": 1
+        },
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2021-09-28"
+        }
+      } 
+    }
+  }
+}
