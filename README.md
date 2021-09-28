@@ -16,7 +16,7 @@ $ docker-compose up -d
 ```
 $ yarn typeorm migration:run
 ```
-#Ambiente de desenvolvimento
+# Ambiente de desenvolvimento
 ```
 $ yarn dev
 ```
